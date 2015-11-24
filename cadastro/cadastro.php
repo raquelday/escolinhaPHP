@@ -16,14 +16,24 @@ try {//Criação do objeto $conn - conexão
 } catch (PDOException $pe) {
     die("Não foi possível se conectar ao banco $dbname :" . $pe->getMessage());
 }
-/**
- * Recepção de dados
- */
-echo "<h1> $_POST[email] </h1>";
-//Fecha conexão com o banco
+
+if(isset($_POST['email']) && !empty($_POST)['email'])){
+
+echo "teste";
+ 
+}else {
+    echo "Botão pressionado sem e-mail";
+}
+
 $conn = null;
 }else{
     //Botão cadastrar não foi pressionado
     //Redireciona para a página inicial
     header('Location: index.php');
 }
+
+/**
+ * tarefa de casa
+ * criar um e-mail HTML, enviando um link com o codigo, para a pessoa clicar
+ * e confirmar seu email
+ */
