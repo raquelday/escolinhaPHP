@@ -10,4 +10,4 @@
             <input type="submit" name="btn" value="cadastrar" />
         </form>
     </body>
-</html
+</html>
