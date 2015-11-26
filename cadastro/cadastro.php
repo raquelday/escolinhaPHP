@@ -83,19 +83,19 @@ if (isset($_POST['btn'])) {
             echo $r['email'] . "\t";
             
             //Link de exclusão
-            echo "<a href='cadastro.php?cod=d&hash=$r[cod]' ";
+            echo "<a href='cadastro.php?cod=d&hash=$r[codigo]' ";
             echo "title='Clique para excluir'>";
-            echo $r['cod'];
+            echo $r['codigo'];
             echo "</a>" . "\t";
        
     
     //link para ser enviado por email
             
             $link = "<a href='".$_SERVER['PHP_SELF'];
-            $link = "?cod=e&hash=$r[cod]' ";
-            $link = "title='Clique para confirmar o e-mail'>";
-            $link = $r['status']. "\t";
-            $link = "<\a>";
+            $link .= "?cod=e&hash=$r[codigo]' ";
+            $link .= "title='Clique para confirmar o e-mail'>";
+            $link .= $r['status']. "\t";
+            $link .= "</a>";
             
             echo $link;
             
@@ -116,16 +116,7 @@ if (isset($_POST['btn'])) {
         
         header("Location: cadastro.php?cod=listar");
     }
-    
-    //Validação do e-mail
-} else {
-    //Botão cadastrar não foi pressionado
-    //E nem o código foi passado
-    //Redireciona para a página inicial
-    header('Location: index.php');
-
-
-} elseif($_GET['cod'] == 'd' && isset ($_GET['hash'])){
+    elseif($_GET['cod'] == 'e' && isset ($_GET['hash'])){
             $sql = "update lista set status=1, dtAtivacao = now() where cod= :hash";
             $hash = filter_input(INPUT_GET, 'hash', FILTER_SANITIZE_STRING);
 
@@ -134,10 +125,13 @@ if (isset($_POST['btn'])) {
             $p = $conn->prepare($sql);
             $q = $p->execute(array(':hash'=>$hash));
 
-            header("Location: cadastro.php?cod=listar")
+            header("Location: cadastro.php?cod=listar");
     }
     
-  
-    
+    //Validação do e-mail
+} else {
+    //Botão cadastrar não foi pressionado
+    //E nem o código foi passado
+    //Redireciona para a página inicial
+    header('Location: index.php');
 }
- 
